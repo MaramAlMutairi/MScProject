@@ -1,0 +1,87 @@
+# The script MUST contain a function named azureml_main
+# which is the entry point for this module.
+# imports up here can be used to 
+import pandas as pd
+import numpy as np
+import random
+# The entry point function can contain up to two input arguments:
+#   Param<dataframe1>: a pandas.DataFrame
+#   Param<dataframe2>: a pandas.DataFrame
+def azureml_main(dataframe1 = None, dataframe2 = None):
+    df1 = pd.DataFrame(index=np.arange(1000), columns=np.arange(8))
+    df1.columns = ['Data Storage (GB)', 'Software Licenses', 'Type of machine', 'GPU', 'File import', 'Export file size (MB)', 
+        'Time period', 'Cost in pounds']
+    dataframe1[['Cost_Data_Storage', 'Cost_Software', 'Cost_machine_pay_as_you_go', 'Cost_machine_1_year', 'Cost_machine_3_years',
+         'Cost_GPU', 'Cost_Export_File']] = dataframe1[['Cost_Data_Storage', 'Cost_Software', 'Cost_machine_pay_as_you_go', 
+         'Cost_machine_1_year', 'Cost_machine_3_years', 'Cost_GPU', 'Cost_Export_File']].apply(pd.to_numeric)
+    i = 0
+    while i<1000:
+        x = random.randint(0, 5)
+        df1 ['Data Storage (GB)'] [i] = dataframe1['Data Storage (GB)'] [x]
+        df1 ['Cost in pounds'] [i] = dataframe1['Cost_Data_Storage'] [x]
+        i=i+1
+    i = 0
+    while i<1000:
+        x = random.randint(0, 5)
+        df1 ['Software Licenses'] [i] = dataframe1['Software Licenses'] [x]
+        df1 ['Cost in pounds'] [i] = df1 ['Cost in pounds'] [i] + dataframe1['Cost_Software'] [x]
+        i=i+1
+    i = 0
+    while i<1000:
+        x = random.randint(0, 4)
+        df1 ['GPU'] [i] = dataframe1['GPU'] [x]
+        df1 ['Cost in pounds'] [i] = df1 ['Cost in pounds'] [i] + dataframe1['Cost_GPU'] [x]
+        i=i+1
+    i = 0
+    while i<1000:
+        if df1 ['GPU'] [i] == 'None': 
+            x = random.randint(0, 5)
+            df1 ['Time period'] [i] = dataframe1['Time period'] [x]
+            i=i+1
+        else:
+            x = random.randint(0, 3)
+            df1 ['Time period'] [i] = dataframe1['Time period'] [x]
+            i=i+1
+    i = 0
+    while i<1000:
+        if df1 ['GPU'] [i] == 'None':
+            x = random.randint(0, 4)
+            df1 ['Type of machine'] [i] = dataframe1['Type of machine'] [x]
+            if df1 ['Time period'] [i] == 3:
+                df1 ['Cost in pounds'] [i] = df1 ['Cost in pounds'] [i] + ((dataframe1['Cost_machine_pay_as_you_go'] [x]) *3)
+            if df1 ['Time period'] [i] == 6:
+                df1 ['Cost in pounds'] [i] = df1 ['Cost in pounds'] [i] + ((dataframe1['Cost_machine_pay_as_you_go'] [x]) *6)
+            if df1 ['Time period'] [i] == 12:
+                df1 ['Cost in pounds'] [i] = df1 ['Cost in pounds'] [i] + (dataframe1['Cost_machine_1_year'] [x])
+            if df1 ['Time period'] [i] == 18:
+                df1 ['Cost in pounds'] [i] = df1 ['Cost in pounds'] [i] + ((dataframe1['Cost_machine_pay_as_you_go'] [x]) * 18)
+            if df1 ['Time period'] [i] == 24:
+                df1 ['Cost in pounds'] [i] = df1 ['Cost in pounds'] [i] + ((dataframe1['Cost_machine_pay_as_you_go'] [x]) * 24)
+            if df1 ['Time period'] [i] == 36:
+                df1 ['Cost in pounds'] [i] = df1 ['Cost in pounds'] [i] + (dataframe1['Cost_machine_3_years'] [x])
+            i=i+1
+        else:    
+            x = random.randint(0, 4)
+            df1 ['Type of machine'] [i] = dataframe1['Type of machine'] [x]
+            if df1 ['Time period'] [i] == 3:
+                df1 ['Cost in pounds'] [i] = df1 ['Cost in pounds'] [i] + ((dataframe1['Cost_machine_pay_as_you_go'] [x]) *3)
+            if df1 ['Time period'] [i] == 6:
+                df1 ['Cost in pounds'] [i] = df1 ['Cost in pounds'] [i] + ((dataframe1['Cost_machine_pay_as_you_go'] [x]) *6)
+            if df1 ['Time period'] [i] == 12:
+                df1 ['Cost in pounds'] [i] = df1 ['Cost in pounds'] [i] + (dataframe1['Cost_machine_1_year'] [x])
+            if df1 ['Time period'] [i] == 18:
+                df1 ['Cost in pounds'] [i] = df1 ['Cost in pounds'] [i] + ((dataframe1['Cost_machine_pay_as_you_go'] [x]) * 18)
+            i=i+1
+    i = 0
+    while i<1000:
+        x = random.randint(0, 5)
+        df1 ['Export file size (MB)'] [i] = dataframe1['Export file size (MB)'] [x]
+        df1 ['Cost in pounds'] [i] =  df1 ['Cost in pounds'] [i] + dataframe1['Cost_Export_File'] [x] 
+        i=i+1
+    i = 0
+    while i<1000:
+        x = random.randint(0, 1)
+        df1 ['File import'] [i] = dataframe1['Import File'] [x]
+        i=i+1
+    df1['Cost in pounds'] = df1['Cost in pounds'].astype(str) 
+    return df1,
