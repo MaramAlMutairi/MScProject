@@ -1,0 +1,7 @@
+﻿Data Storage (GB),Cost_Data_Storage,Software Licenses,Cost_Software,Type of machine,Cost_machine_pay_as_you_go,Cost_machine_1_year,Cost_machine_3_years,GPU,Cost_GPU,Export file size (MB),Cost_Export_File,Time period,Import File
+50,2861.99,Immersive Reader,7.14, 4_16 ,102.8303,60.1204,38.6729,None,0,100,5.66,3,Yes
+100,5723.97,Face,2.86,8_32,205.6606,120.2408,77.3458,NC12 ,1347.98,500,11.63,6,No
+250,14309.93,Text Analytics,0,16_64,410.7771,240.4216,154.6916,NC12 Promo ,593.11,1000,17.59,12,
+500,28619.87,Speaker,14.29,32_128,966.2783,579.7887,386.5059,NV12 ,1577.54,2000,23.55,18,
+750,42929.8,Speech Services,0,64_256,1932.5565,1159.5121,773.0281,NV12s v3 ,748.6,5000,29.51,24,
+1000,57239.73,None,0,,,,,,,0,0,36,
